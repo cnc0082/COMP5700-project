@@ -1,9 +1,11 @@
 # comp5700-project
 
 ## Team Members
-|      Name        |  Email ID   |   Banner ID   |
-|  Chase Childers  |  cnc0082    |   902732826   |
-|  Woosol Kim      |  wzk0029    |   904367055   |
+
+| Name | Email ID | Banner ID |
+|------|----------|-----------|
+| Chase Childers | cnc0082@auburn.edu | 902732826 |
+| Woosol Kim | wzk0029@auburn.edu | 904367055 |
 
 
 
