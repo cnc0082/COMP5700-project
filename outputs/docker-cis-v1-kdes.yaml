@@ -1,0 +1,853 @@
+'644':
+  name: '644'
+  requirements:
+  - Ensure that daemon.json file permissions are set to 644 or more restrictive
+  - Ensure that docker.socket file permissions are set to 644 or more restrictive
+  - Ensure that the /etc/default/docker file permissions are set to 644 or more restrictively
+  - Ensure that the /etc/sysconfig/docker file permissions are set to 644 or more
+    restrictively
+'660':
+  name: '660'
+  requirements:
+  - Ensure that the Containerd socket file permissions are set to 660 or more restrictively
+  - Ensure that the Docker socket file permissions are set to 660 or more restrictively
+'755':
+  name: '755'
+  requirements:
+  - Ensure that /etc/docker directory permissions are set to 755 or more restrictively
+apparmor_profile:
+  name: apparmor profile
+  requirements:
+  - Ensure that, if applicable, an AppArmor Profile is enabled
+artifact:
+  name: artifact
+  requirements:
+  - Ensure all signed artifacts are validated
+aufs_storage_driver:
+  name: aufs storage driver
+  requirements:
+  - Ensure aufs storage driver is not used
+auto_lock:
+  name: auto-lock
+  requirements:
+  - Ensure that the swarm manager auto-lock key is rotated periodically
+base_device_size:
+  name: base device size
+  requirements:
+  - Ensure base device size is not changed until needed
+baseimage:
+  name: baseimage
+  requirements:
+  - Ensure that containers use only trusted base images
+ca_certificate:
+  name: ca certificate
+  requirements:
+  - Ensure that CA certificates are rotated as appropriate
+  - Ensure that TLS CA certificate file ownership is set to root:root
+ca_certificate_rotation:
+  name: ca certificate rotation
+  requirements:
+  - Ensure that CA certificates are rotated as appropriate
+ca_certificates:
+  name: ca certificates
+  requirements:
+  - Ensure that CA certificates are rotated as appropriate
+capabilities:
+  name: capabilities
+  requirements:
+  - Ensure that Linux kernel capabilities are restricted within containers
+certificate:
+  name: certificate
+  requirements:
+  - Ensure that node certificates are rotated as appropriate
+certificate_file:
+  name: certificate file
+  requirements:
+  - Ensure that registry certificate file permissions are set to 444 or more restrictively
+certificate_key:
+  name: certificate key
+  requirements:
+  - Ensure that the Docker server certificate key file ownership is set to root:root
+  - Ensure that the Docker server certificate key file permissions are set to 400
+certificate_permissions:
+  name: certificate permissions
+  requirements:
+  - Ensure that the Docker server certificate file permissions are set to 444 or more
+    restrictively
+cgroup:
+  name: cgroup
+  requirements:
+  - Ensure that cgroup usage is confirmed
+  - Ensure the default cgroup usage has been confirmed
+cgroup_usage:
+  name: cgroup usage
+  requirements:
+  - Ensure that cgroup usage is confirmed
+  - Ensure the default cgroup usage has been confirmed
+config_toml:
+  name: config.toml
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /etc/containerd/config.toml
+container:
+  name: container
+  requirements:
+  - Ensure that host devices are not directly exposed to containers
+  - Ensure that privileged containers are not used
+container_health:
+  name: container health
+  requirements:
+  - Ensure that container health is checked at runtime
+container_host:
+  name: container host
+  requirements:
+  - Ensure the container host has been Hardened
+  - General Configuration 1.2.1 Ensure the container host has been Hardened
+container_network:
+  name: container network
+  requirements:
+  - Ensure network traffic is restricted between containers on the default bridge
+container_partition:
+  name: container partition
+  requirements:
+  - Ensure a separate partition for containers has been created
+container_ports:
+  name: container ports
+  requirements:
+  - Ensure that only needed ports are open on the container
+container_privileges:
+  name: container privileges
+  requirements:
+  - Ensure containers are restricted from acquiring new privileges
+  - Ensure that the container is restricted from acquiring additional privileges
+container_restart_policy:
+  name: container restart policy
+  requirements:
+  - Ensure that the 'on-failure' container restart policy is set to '5'
+container_root_filesystem:
+  name: container root filesystem
+  requirements:
+  - Ensure that the container's root filesystem is mounted as read only
+container_sprawl:
+  name: container sprawl
+  requirements:
+  - Ensure that container sprawl is avoided
+container_user:
+  name: container user
+  requirements:
+  - Ensure that a user for the container has been created
+containerd:
+  name: containerd
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /run/containerd
+  - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+containerd_shim:
+  name: containerd-shim
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim
+containerd_shim_runc_v1:
+  name: containerd-shim-runc-v1
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-runc-v1
+containerd_shim_runc_v2:
+  name: containerd-shim-runc-v2
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-runc-v2
+containerd_sock:
+  name: containerd sock
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - containerd.sock
+containerd_socket_file:
+  name: containerd socket file
+  requirements:
+  - Ensure that the Containerd socket file ownership is set to root:root
+  - Ensure that the Containerd socket file permissions are set to 660 or more restrictively
+content_trust:
+  name: content trust
+  requirements:
+  - Ensure Content trust for Docker is Enabled
+copy:
+  name: copy
+  requirements:
+  - Ensure that COPY is used instead of ADD in Dockerfiles
+copy_command:
+  name: copy command
+  requirements:
+  - Ensure that COPY is used instead of ADD in Dockerfiles
+cpu_priority:
+  name: cpu priority
+  requirements:
+  - Ensure that CPU priority is set appropriately on containers
+daemon_json:
+  name: daemon.json
+  requirements:
+  - Ensure that daemon.json file permissions are set to 644 or more restrictive
+  - Ensure that the daemon.json file ownership is set to root:root
+device_size:
+  name: device size
+  requirements:
+  - Ensure base device size is not changed until needed
+docker0:
+  name: docker0
+  requirements:
+  - Ensure that Docker's default bridge "docker0" is not used
+docker_audit:
+  name: docker audit
+  requirements:
+  - Ensure auditing is configured for the Docker daemon
+docker_certificate:
+  name: docker certificate
+  requirements:
+  - Ensure that Docker server certificate file ownership is set to root:root
+  - Ensure that the Docker server certificate file permissions are set to 444 or more
+    restrictively
+docker_certificate_key:
+  name: docker certificate key
+  requirements:
+  - Ensure that the Docker server certificate key file ownership is set to root:root
+  - Ensure that the Docker server certificate key file permissions are set to 400
+docker_client_commands:
+  name: docker client commands
+  requirements:
+  - Ensure that authorization for Docker client commands is enabled
+docker_commands:
+  name: docker commands
+  requirements:
+  - Ensure that authorization for Docker client commands is enabled
+docker_component:
+  name: docker component
+  requirements:
+  - Ensure Content trust for Docker is Enabled
+docker_config_toml:
+  name: docker.config.toml
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /etc/containerd/config.toml
+docker_container_audit:
+  name: docker container audit
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim
+docker_container_audit_logs:
+  name: docker container audit logs
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+docker_daemon:
+  name: docker daemon
+  requirements:
+  - Ensure Docker is allowed to make changes to iptables
+  - Ensure TLS authentication for Docker daemon is configured
+  - Ensure auditing is configured for the Docker daemon
+  - Ensure only trusted users are allowed to control Docker daemon
+  - Ensure that a daemon-wide custom seccomp profile is applied if appropriate
+  - Ensure that the docker.service file ownership is set to root:root
+  - Run the Docker daemon as a non-root user, if possible
+docker_daemon_json:
+  name: docker.daemon.json
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /etc/docker/daemon.json
+docker_directory:
+  name: docker directory
+  requirements:
+  - Ensure that the /etc/docker directory ownership is set to root:root
+docker_directory_permissions:
+  name: docker directory permissions
+  requirements:
+  - Ensure that /etc/docker directory permissions are set to 755 or more restrictively
+docker_driver:
+  name: docker driver
+  requirements:
+  - Ensure aufs storage driver is not used
+docker_exec:
+  name: docker exec
+  requirements:
+  - Ensure that docker exec commands are not used with the privileged option
+  - Ensure that docker exec commands are not used with the user=root option
+docker_file:
+  name: docker.file
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /etc/default/docker
+  - Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+  - Ensure that the /etc/sysconfig/docker file ownership is set to root:root
+docker_file_permissions:
+  name: docker file permissions
+  requirements:
+  - Ensure that the /etc/sysconfig/docker file permissions are set to 644 or more
+    restrictively
+docker_files:
+  name: docker.files
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /etc/docker
+  - Ensure auditing is configured for Docker files and directories - /etc/docker/daemon.json
+  - Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+  - Ensure auditing is configured for Docker files and directories - /run/containerd
+  - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-runc-v1
+  - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim-runc-v2
+  - Ensure auditing is configured for Docker files and directories - /var/lib/docker
+docker_host:
+  name: docker host
+  requirements:
+  - Ensure the container host has been Hardened
+  - General Configuration 1.2.1 Ensure the container host has been Hardened
+docker_image:
+  name: docker image
+  requirements:
+  - Ensure that Docker commands always make use of the latest version of their image
+  - Ensure that HEALTHCHECK instructions have been added to container images
+  - Ensure that containers use only trusted base images
+  - Ensure that image sprawl is avoided
+docker_images:
+  name: docker images
+  requirements:
+  - Ensure images are scanned and rebuilt to include security patches
+docker_json:
+  name: docker.json
+  requirements:
+  - Ensure that daemon.json file permissions are set to 644 or more restrictive
+docker_json_file:
+  name: docker.json file
+  requirements:
+  - Ensure that the daemon.json file ownership is set to root:root
+docker_live_restore:
+  name: docker live restore
+  requirements:
+  - Ensure live restore is enabled
+docker_logging:
+  name: docker logging
+  requirements:
+  - Ensure centralized and remote logging is configured
+docker_pid_cgroup_limit:
+  name: docker pid cgroup limit
+  requirements:
+  - Ensure that the PIDs cgroup limit is used
+docker_registry:
+  name: docker registry
+  requirements:
+  - Ensure insecure registries are not used
+docker_registry_certificate_file:
+  name: docker registry certificate file
+  requirements:
+  - Ensure that registry certificate file ownership is set to root:root
+docker_secret_management:
+  name: docker secret management
+  requirements:
+  - Ensure that Docker's secret management commands are used for managing secrets
+    in a swarm cluster
+docker_server_certificate_file:
+  name: docker server certificate file
+  requirements:
+  - Ensure that Docker server certificate file ownership is set to root:root
+  - Ensure that the Docker server certificate file permissions are set to 444 or more
+    restrictively
+docker_server_certificate_key_file:
+  name: docker server certificate key file
+  requirements:
+  - Ensure that the Docker server certificate key file ownership is set to root:root
+  - Ensure that the Docker server certificate key file permissions are set to 400
+docker_service:
+  name: docker.service
+  requirements:
+  - Ensure Content trust for Docker is Enabled
+  - Ensure auditing is configured for Docker files and directories - docker.service
+  - Ensure that docker.service file permissions are appropriately set
+  - Ensure that the docker.service file ownership is set to root:root
+docker_service_file:
+  name: docker.service file
+  requirements:
+  - Ensure mount propagation mode is not set to shared
+  - Ensure sensitive host system directories are not mounted on containers
+  - Ensure setuid and setgid permissions are removed
+  - Ensure that /etc/docker directory permissions are set to 755 or more restrictively
+  - Ensure that TLS CA certificate file ownership is set to root:root
+  - Ensure that TLS CA certificate file permissions are set to 444 or more restrictively
+  - Ensure that docker.service file permissions are appropriately set
+  - Ensure that the /etc/default/docker file ownership is set to root:root
+  - Ensure that the /etc/default/docker file permissions are set to 644 or more restrictively
+  - Ensure that the /etc/docker directory ownership is set to root:root
+  - Ensure that the /etc/sysconfig/docker file ownership is set to root:root
+  - Ensure that the /etc/sysconfig/docker file permissions are set to 644 or more
+    restrictively
+  - Ensure that the docker.service file ownership is set to root:root
+  - Ensure the default ulimit is configured appropriately
+docker_shim:
+  name: docker-shim
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd-shim
+docker_sock:
+  name: docker.sock
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - containerd.sock
+  - Ensure auditing is configured for Docker files and directories - docker.sock
+docker_socket:
+  name: docker.socket
+  requirements:
+  - Ensure that docker.socket file ownership is set to root:root
+  - Ensure that docker.socket file permissions are set to 644 or more restrictive
+  - Ensure that the Docker socket file ownership is set to root:docker
+  - Ensure that the Docker socket is not mounted inside any containers
+docker_socket_file:
+  name: docker.socket file
+  requirements:
+  - Ensure that docker.socket file ownership is set to root:root
+  - Ensure that docker.socket file permissions are set to 644 or more restrictive
+  - Ensure that the Docker socket file ownership is set to root:docker
+  - Ensure that the Docker socket file permissions are set to 660 or more restrictively
+docker_swarm_overlay_networks:
+  name: docker swarm overlay networks
+  requirements:
+  - Ensure that all Docker swarm overlay networks are encrypted
+docker_user:
+  name: docker user
+  requirements:
+  - Ensure that the /etc/default/docker file ownership is set to root:root
+docker_version:
+  name: docker version
+  requirements:
+  - Ensure that the version of Docker is up to date
+docker_volume:
+  name: docker volume
+  requirements:
+  - Ensure sensitive host system directories are not mounted on containers
+dockerfile:
+  name: dockerfile
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /etc/containerd/config.toml
+  - Ensure auditing is configured for Docker files and directories - /etc/default/docker
+  - Ensure auditing is configured for Docker files and directories - /etc/docker
+  - Ensure auditing is configured for Docker files and directories - /etc/sysconfig/docker
+  - Ensure auditing is configured for Docker files and directories - /usr/bin/containerd
+  - Ensure auditing is configured for Docker files and directories - /var/lib/docker
+  - Ensure auditing is configured for Docker files and directories - docker.service
+  - Ensure secrets are not stored in Dockerfiles
+  - Ensure update instructions are not used alone in Dockerfiles
+encryption:
+  name: encryption
+  requirements:
+  - Ensure that all Docker swarm overlay networks are encrypted
+etc_docker:
+  name: /etc/docker
+  requirements:
+  - Ensure that the /etc/docker directory ownership is set to root:root
+experimental_features:
+  name: experimental features
+  requirements:
+  - Ensure that experimental features are not implemented in production
+experimentation:
+  name: experimentation
+  requirements:
+  - Ensure that experimental features are not implemented in production
+feature:
+  name: feature
+  requirements:
+  - Ensure that experimental features are not implemented in production
+file:
+  name: file
+  requirements:
+  - Ensure that the /etc/sysconfig/docker file ownership is set to root:root
+file_permissions:
+  name: file permissions
+  requirements:
+  - Ensure that the /etc/default/docker file permissions are set to 644 or more restrictively
+healthcheck:
+  name: healthcheck
+  requirements:
+  - Ensure that HEALTHCHECK instructions have been added to container images
+host:
+  name: host
+  requirements:
+  - General Configuration 1.2.1 Ensure the container host has been Hardened
+host_device:
+  name: host device
+  requirements:
+  - Ensure that host devices are not directly exposed to containers
+host_devices:
+  name: host devices
+  requirements:
+  - Ensure that host devices are not directly exposed to containers
+host_interface:
+  name: host interface
+  requirements:
+  - Ensure that incoming container traffic is bound to a specific host interface
+  - Ensure that swarm services are bound to a specific host interface
+host_network_namespace:
+  name: host network namespace
+  requirements:
+  - Ensure that the host's network namespace is not shared
+host_process_namespace:
+  name: host process namespace
+  requirements:
+  - Ensure that the host's process namespace is not shared
+host_security:
+  name: host security
+  requirements:
+  - Ensure the container host has been Hardened
+host_user_namespaces:
+  name: host user namespaces
+  requirements:
+  - Ensure that the host's user namespaces are not shared
+host_uts_namespace:
+  name: host uts namespace
+  requirements:
+  - Ensure that the host's UTS namespace is not shared
+image:
+  name: image
+  requirements:
+  - Ensure that containers use only trusted base images
+image_scan:
+  name: image scan
+  requirements:
+  - Ensure images are scanned and rebuilt to include security patches
+image_sprawl:
+  name: image sprawl
+  requirements:
+  - Ensure that image sprawl is avoided
+image_version:
+  name: image version
+  requirements:
+  - Ensure that Docker commands always make use of the latest version of their image
+interface:
+  name: interface
+  requirements:
+  - Ensure that incoming container traffic is bound to a specific host interface
+  - Ensure that swarm services are bound to a specific host interface
+ipc_namespace:
+  name: ipc namespace
+  requirements:
+  - Ensure that the host's IPC namespace is not shared
+iptables:
+  name: iptables
+  requirements:
+  - Ensure Docker is allowed to make changes to iptables
+kernel_capabilities:
+  name: kernel capabilities
+  requirements:
+  - Ensure that Linux kernel capabilities are restricted within containers
+linux_kernel_capabilities:
+  name: linux kernel capabilities
+  requirements:
+  - Ensure that Linux kernel capabilities are restricted within containers
+live_restore:
+  name: live restore
+  requirements:
+  - Ensure live restore is enabled
+logging:
+  name: logging
+  requirements:
+  - Ensure centralized and remote logging is configured
+logging_level:
+  name: logging level
+  requirements:
+  - Ensure the logging level is set to 'info'
+management_plane_traffic:
+  name: management plane traffic
+  requirements:
+  - Ensure that management plane traffic is separated from data plane traffic
+manager_node:
+  name: manager node
+  requirements:
+  - Ensure that the minimum number of manager nodes have been created in a swarm
+manager_nodes:
+  name: manager nodes
+  requirements:
+  - Ensure that the minimum number of manager nodes have been created in a swarm
+memory_usage:
+  name: memory usage
+  requirements:
+  - Ensure that the memory usage for containers is limited
+mount_propagation_mode:
+  name: mount propagation mode
+  requirements:
+  - Ensure mount propagation mode is not set to shared
+mounts:
+  name: mounts
+  requirements:
+  - Ensure sensitive host system directories are not mounted on containers
+namespace:
+  name: namespace
+  requirements:
+  - Enable user namespace support
+network:
+  name: network
+  requirements:
+  - Ensure that management plane traffic is separated from data plane traffic
+network_namespace:
+  name: network namespace
+  requirements:
+  - Ensure that the host's network namespace is not shared
+network_traffic:
+  name: network traffic
+  requirements:
+  - Ensure network traffic is restricted between containers on the default bridge
+network_traffic_control:
+  name: network traffic control
+  requirements:
+  - Ensure network traffic is restricted between containers on the default bridge
+node_certificates:
+  name: node certificates
+  requirements:
+  - Ensure that node certificates are rotated as appropriate
+on_failure:
+  name: on-failure
+  requirements:
+  - Ensure that the 'on-failure' container restart policy is set to '5'
+overlay_network:
+  name: overlay network
+  requirements:
+  - Ensure that all Docker swarm overlay networks are encrypted
+package:
+  name: package
+  requirements:
+  - Ensure only verified packages are installed
+packages:
+  name: packages
+  requirements:
+  - Ensure only verified packages are installed
+  - Ensure that unnecessary packages are not installed in the container
+partition:
+  name: partition
+  requirements:
+  - Ensure a separate partition for containers has been created
+pid:
+  name: pid
+  requirements:
+  - Ensure that the PIDs cgroup limit is used
+pids:
+  name: pids
+  requirements:
+  - Ensure that the PIDs cgroup limit is used
+port:
+  name: port
+  requirements:
+  - Ensure that only needed ports are open on the container
+port_mapping:
+  name: port mapping
+  requirements:
+  - Ensure privileged ports are not mapped within containers
+ports:
+  name: ports
+  requirements:
+  - Ensure that only needed ports are open on the container
+privilege_management:
+  name: privilege management
+  requirements:
+  - Ensure containers are restricted from acquiring new privileges
+  - Ensure that the container is restricted from acquiring additional privileges
+privileged_command:
+  name: privileged command
+  requirements:
+  - Ensure that docker exec commands are not used with the privileged option
+privileged_container:
+  name: privileged container
+  requirements:
+  - Ensure that privileged containers are not used
+privileged_ports:
+  name: privileged ports
+  requirements:
+  - Ensure privileged ports are not mapped within containers
+process_namespace:
+  name: process namespace
+  requirements:
+  - Ensure that the host's process namespace is not shared
+proxy:
+  name: proxy
+  requirements:
+  - Ensure Userland Proxy is Disabled
+registry:
+  name: registry
+  requirements:
+  - Ensure insecure registries are not used
+registry_certificate:
+  name: registry certificate
+  requirements:
+  - Ensure that registry certificate file ownership is set to root:root
+  - Ensure that registry certificate file permissions are set to 444 or more restrictively
+registry_certificate_file:
+  name: registry certificate file
+  requirements:
+  - Ensure that registry certificate file permissions are set to 444 or more restrictively
+restore:
+  name: restore
+  requirements:
+  - Ensure live restore is enabled
+root_docker:
+  name: root:docker
+  requirements:
+  - Ensure that the Docker socket file ownership is set to root:docker
+root_filesystem:
+  name: root filesystem
+  requirements:
+  - Ensure that the container's root filesystem is mounted as read only
+root_root:
+  name: root:root
+  requirements:
+  - Ensure that the /etc/default/docker file ownership is set to root:root
+  - Ensure that the daemon.json file ownership is set to root:root
+rootfs:
+  name: /rootfs
+  requirements:
+  - Ensure that the container's root filesystem is mounted as read only
+run_containerd:
+  name: /run/containerd
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /run/containerd
+runc:
+  name: runc
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - /usr/bin/runc
+runtimehealth:
+  name: runtimehealth
+  requirements:
+  - Ensure that container health is checked at runtime
+seccomp_profile:
+  name: seccomp profile
+  requirements:
+  - Ensure that a daemon-wide custom seccomp profile is applied if appropriate
+  - Ensure the default seccomp profile is not Disabled
+secret:
+  name: secret
+  requirements:
+  - Ensure secrets are not stored in Dockerfiles
+secret_management:
+  name: secret management
+  requirements:
+  - Ensure that Docker's secret management commands are used for managing secrets
+    in a swarm cluster
+security_patches:
+  name: security patches
+  requirements:
+  - Ensure images are scanned and rebuilt to include security patches
+selinux:
+  name: selinux
+  requirements:
+  - Ensure that, if applicable, SELinux security options are set
+selinux_option:
+  name: selinux option
+  requirements:
+  - Ensure that, if applicable, SELinux security options are set
+setuid:
+  name: setuid
+  requirements:
+  - Ensure setuid and setgid permissions are removed
+setuid_and_setgid:
+  name: setuid and setgid
+  requirements:
+  - Ensure setuid and setgid permissions are removed
+signed_artifact:
+  name: signed artifact
+  requirements:
+  - Ensure all signed artifacts are validated
+signed_artifacts:
+  name: signed artifacts
+  requirements:
+  - Ensure all signed artifacts are validated
+sock:
+  name: sock
+  requirements:
+  - Ensure auditing is configured for Docker files and directories - containerd.sock
+socket:
+  name: socket
+  requirements:
+  - Ensure that the Containerd socket file ownership is set to root:root
+socket_permissions:
+  name: socket permissions
+  requirements:
+  - Ensure that the Containerd socket file permissions are set to 660 or more restrictively
+  - Ensure that the Docker socket file permissions are set to 660 or more restrictively
+ssh_daemon:
+  name: ssh daemon
+  requirements:
+  - Ensure sshd is not run within containers
+sshd:
+  name: sshd
+  requirements:
+  - Ensure sshd is not run within containers
+storage_driver:
+  name: storage driver
+  requirements:
+  - Ensure aufs storage driver is not used
+swarm_manager:
+  name: swarm manager
+  requirements:
+  - Ensure that swarm manager is run in auto-lock mode
+swarm_manager_auto_lock_key:
+  name: swarm manager auto-lock key
+  requirements:
+  - Ensure that the swarm manager auto-lock key is rotated periodically
+swarm_manager_nodes:
+  name: swarm manager nodes
+  requirements:
+  - Ensure that the minimum number of manager nodes have been created in a swarm
+swarm_mode:
+  name: swarm mode
+  requirements:
+  - Ensure swarm mode is not Enabled, if not needed
+swarm_service:
+  name: swarm service
+  requirements:
+  - Ensure that swarm services are bound to a specific host interface
+swarmmode:
+  name: swarmmode
+  requirements:
+  - Ensure swarm mode is not Enabled, if not needed
+tls_authentication:
+  name: tls authentication
+  requirements:
+  - Ensure TLS authentication for Docker daemon is configured
+tls_ca_certificate:
+  name: tls ca certificate
+  requirements:
+  - Ensure that TLS CA certificate file ownership is set to root:root
+  - Ensure that TLS CA certificate file permissions are set to 444 or more restrictively
+traffic_separation:
+  name: traffic separation
+  requirements:
+  - Ensure that management plane traffic is separated from data plane traffic
+ulimit:
+  name: ulimit
+  requirements:
+  - Ensure that the default ulimit is overwritten at runtime if needed
+  - Ensure the default ulimit is configured appropriately
+update_instructions:
+  name: update instructions
+  requirements:
+  - Ensure update instructions are not used alone in Dockerfiles
+updateinstructions:
+  name: updateinstructions
+  requirements:
+  - Ensure update instructions are not used alone in Dockerfiles
+user:
+  name: user
+  requirements:
+  - Ensure that a user for the container has been created
+  - Ensure that docker exec commands are not used with the user=root option
+  - Run the Docker daemon as a non-root user, if possible
+user_id:
+  name: user id
+  requirements:
+  - Ensure only trusted users are allowed to control Docker daemon
+  - Ensure that a user for the container has been created
+user_namespace:
+  name: user namespace
+  requirements:
+  - Enable user namespace support
+user_namespace_support:
+  name: user namespace support
+  requirements:
+  - Enable user namespace support
+user_namespaces:
+  name: user namespaces
+  requirements:
+  - Ensure that the host's user namespaces are not shared
+userland_proxy:
+  name: userland proxy
+  requirements:
+  - Ensure Userland Proxy is Disabled
+uts:
+  name: uts
+  requirements:
+  - Ensure that the host's UTS namespace is not shared
+uts_namespace:
+  name: uts namespace
+  requirements:
+  - Ensure that the host's UTS namespace is not shared
+verified_packages:
+  name: verified packages
+  requirements:
+  - Ensure only verified packages are installed
