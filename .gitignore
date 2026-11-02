@@ -220,3 +220,7 @@ __marimo__/
 .streamlit/secrets.toml
 comp5700-venv/
 gemma_test.py
+
+# Task 3 input (425 MB, over GitHub limit): download from course SharePoint
+inputs/dockerfiles.zip
+inputs/dockerfiles/
