@@ -60,11 +60,14 @@ def map_differences(differences, output_path):
                         found_rules.append(rule_id)
 
     with open(output_path, "w", encoding="utf-8") as f:
-        if found_rules:
+        if not differences:
+            f.write("NO DIFFERENCES FOUND\n")
+        elif not found_rules:
+            # there are differences but none of them match a hadolint rule
+            f.write("NO MAPPING FOUND\n")
+        else:
             for found in found_rules:
                 f.write(found + "\n")
-        else:
-            f.write("NO DIFFERENCES FOUND\n")
     return found_rules
 
 
@@ -91,7 +94,7 @@ def run_hadolint(rules_path, zip_path, extract_dir, limit=None):
     with open(rules_path, "r", encoding="utf-8") as f:
         content = f.read()
     rule_ids = []
-    if "NO DIFFERENCES FOUND" not in content:
+    if "NO DIFFERENCES FOUND" not in content and "NO MAPPING FOUND" not in content:
         for line in content.splitlines():
             line = line.strip()
             if line != "":
@@ -127,3 +130,13 @@ def run_hadolint(rules_path, zip_path, extract_dir, limit=None):
                 "message": finding["message"],
             })
     return pd.DataFrame(rows, columns=["file", "code", "level", "line", "message"])
+
+
+# count how many times each rule was found in each file and save it as a csv
+def make_csv(df, output_path):
+    # one row per file + rule, with how many times it showed up
+    counts = df.groupby(["file", "level", "code"]).size().reset_index(name="COUNT")
+    counts = counts.rename(columns={"file": "FilePath", "level": "DefaultSeverity", "code": "RULEID"})
+    counts = counts[["FilePath", "DefaultSeverity", "RULEID", "COUNT"]]
+    counts.to_csv(output_path, index=False)
+    return counts
