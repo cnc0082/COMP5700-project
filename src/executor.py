@@ -5,12 +5,12 @@ import zipfile
 
 import pandas as pd
 
-# how many dockerfiles to give hadolint at once (windows limits command length)
+# dockerfiles per hadolint call
+# marks a finished unzip
 BATCH_SIZE = 200
-# file that shows the zip was fully unzipped
 DONE_MARKER = ".extracted"
 
-# CIS keyword -> hadolint rules that match it
+
 rules = {
          "user for the container": ["DL3002", "DL3004"],
          "trusted base images": ["DL3006", "DL3007"],
@@ -22,13 +22,12 @@ rules = {
          "verified packages": ["DL3008", "DL3013", "DL3016", "DL3018"]
          }
 
-# read the two task 2 text files into one list of differences
+# read both task 2 files into one list
 def load_differences(file1, file2):
     differences = []
     with open(file1, "r", encoding="utf-8") as f:
         for line in f:
             line = line.lower().strip()
-            # skip the no differences message and blank lines
             if "no differences in regards to" in line:
                 continue
             if line == "":
@@ -48,13 +47,13 @@ def load_differences(file1, file2):
     return differences
 
 
-# find the hadolint rules that match the differences and write them to a text file
+# write the hadolint rules that match the differences
 def map_differences(differences, output_path):
     found_rules = []
     for rule in rules:
         for difference in differences:
             if rule in difference:
-                # add each matching rule once
+                # add each rule once
                 for rule_id in rules[rule]:
                     if rule_id not in found_rules:
                         found_rules.append(rule_id)
@@ -63,7 +62,6 @@ def map_differences(differences, output_path):
         if not differences:
             f.write("NO DIFFERENCES FOUND\n")
         elif not found_rules:
-            # there are differences but none of them match a hadolint rule
             f.write("NO MAPPING FOUND\n")
         else:
             for found in found_rules:
@@ -71,15 +69,13 @@ def map_differences(differences, output_path):
     return found_rules
 
 
-# unzip the dockerfiles into a folder
+# unzip the dockerfiles
 def extract_dockerfiles(zip_path, extract_dir):
-    # already unzipped, skip it
     if os.path.isfile(os.path.join(extract_dir, DONE_MARKER)):
         return
     os.makedirs(extract_dir, exist_ok=True)
     with zipfile.ZipFile(zip_path) as z:
         for name in z.namelist():
-            # skip mac junk files
             if name.startswith("__MACOSX") or not name.endswith(".Dockerfile"):
                 continue
             with open(os.path.join(extract_dir, os.path.basename(name)), "wb") as f:
@@ -88,9 +84,17 @@ def extract_dockerfiles(zip_path, extract_dir):
         f.write("done\n")
 
 
-# run hadolint on the dockerfiles and return the results as a dataframe
+# run hadolint on files, None if it crashed
+def scan_files(files, extract_dir):
+    command = ["hadolint", "--format", "json", "--no-fail", "--warning", "DL3057"] + files
+    result = subprocess.run(command, capture_output=True, encoding="utf-8", errors="replace", cwd=extract_dir)
+    if not result.stdout.strip():
+        return None
+    return json.loads(result.stdout)
+
+
+# scan the dockerfiles, return a dataframe
 def run_hadolint(rules_path, zip_path, extract_dir, limit=None):
-    # get the rule ids from the text file (empty list means all rules)
     with open(rules_path, "r", encoding="utf-8") as f:
         content = f.read()
     rule_ids = []
@@ -100,7 +104,7 @@ def run_hadolint(rules_path, zip_path, extract_dir, limit=None):
             if line != "":
                 rule_ids.append(line)
 
-    # get the list of dockerfiles to scan
+    # dockerfiles to scan
     extract_dockerfiles(zip_path, extract_dir)
     names = []
     for name in sorted(os.listdir(extract_dir)):
@@ -112,14 +116,16 @@ def run_hadolint(rules_path, zip_path, extract_dir, limit=None):
     rows = []
     for start in range(0, len(names), BATCH_SIZE):
         batch = names[start:start + BATCH_SIZE]
-        # DL3057 is off by default so turn it on
-        command = ["hadolint", "--format", "json", "--no-fail", "--warning", "DL3057"]
-        for name in batch:
-            command.append(name)
-        # run from inside the folder so the file names are short
-        result = subprocess.run(command, capture_output=True, text=True, cwd=extract_dir)
-        for finding in json.loads(result.stdout):
-            # only keep the rules we want
+        findings = scan_files(batch, extract_dir)
+        if findings is None:
+            findings = []
+            for name in batch:
+                one = scan_files([name], extract_dir)
+                if one is None:
+                    print(f"  skipped (hadolint crashed): {name}", flush=True)
+                else:
+                    findings += one
+        for finding in findings:
             if rule_ids and finding["code"] not in rule_ids:
                 continue
             rows.append({
@@ -132,9 +138,8 @@ def run_hadolint(rules_path, zip_path, extract_dir, limit=None):
     return pd.DataFrame(rows, columns=["file", "code", "level", "line", "message"])
 
 
-# count how many times each rule was found in each file and save it as a csv
+# count findings per file and rule, save as csv
 def make_csv(df, output_path):
-    # one row per file + rule, with how many times it showed up
     counts = df.groupby(["file", "level", "code"]).size().reset_index(name="COUNT")
     counts = counts.rename(columns={"file": "FilePath", "level": "DefaultSeverity", "code": "RULEID"})
     counts = counts[["FilePath", "DefaultSeverity", "RULEID", "COUNT"]]

@@ -224,3 +224,4 @@ gemma_test.py
 # Task 3 input (425 MB, over GitHub limit): download from course SharePoint
 inputs/dockerfiles.zip
 inputs/dockerfiles/
+outputs/dockerfiles/
