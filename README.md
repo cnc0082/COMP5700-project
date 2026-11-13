@@ -22,7 +22,12 @@ pip install -r requirements.txt
 dist\comp5700.exe inputs/docker-cis-v0.pdf inputs/docker-cis-v1.pdf --zip dockerfiles.zip
 ```
 
-Results are written to `outputs/`. Use `--limit N` to scan only the first N Dockerfiles.
+Results are written to `outputs/`. Use `--limit N` to scan only the first N Dockerfiles. Run from the repository root so the binary finds `outputs/llm-cache.json`, which holds the saved Gemma replies for all three PDFs and skips the ~40 minute model run.
+
+## Output Files
+`outputs/hadolint-results.zip` contains `hadolint-results.csv`, the full scan of all 397,133 Dockerfiles (1,598,291 rows). It is zipped because the CSV (115 MB) is over GitHub's 100 MB file limit.
+
+Excel only displays the first 1,048,576 rows of a sheet, so opening the CSV directly in Excel cuts it off. The file itself is complete. To see every row, load it with pandas (`pd.read_csv("hadolint-results.csv")`) or in Excel use Data → Get Data → From Text/CSV and load it to the Data Model.
 
 ## Building the Binary
 PyInstaller only builds for the OS it runs on. To build on Mac/Linux, run this inside the virtual environment (output goes to `dist/comp5700`):
