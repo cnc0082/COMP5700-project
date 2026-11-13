@@ -13,7 +13,7 @@
 google/gemma-3-1b-it
 
 ## Running the Binary
-Hadolint must be installed and on PATH. Download `dockerfiles.zip` from the course SharePoint.
+Download `comp5700.exe` from the [latest release](https://github.com/cnc0082/COMP5700-project/releases/latest) and place it in `dist/`. Hadolint must be installed and on PATH. Download `dockerfiles.zip` from the course SharePoint.
 
 ```
 python -m venv comp5700-venv
